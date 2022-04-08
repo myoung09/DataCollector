@@ -1,0 +1,12 @@
+C:\Users\michael.young\source\repos\DataCollector\bin\Debug\DataCollector.exe.config
+C:\Users\michael.young\source\repos\DataCollector\bin\Debug\DataCollector.exe
+C:\Users\michael.young\source\repos\DataCollector\bin\Debug\DataCollector.pdb
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.csproj.AssemblyReference.cache
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.Form1.resources
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.Properties.Resources.resources
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.csproj.GenerateResource.cache
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.csproj.CoreCompileInputs.cache
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.exe
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.pdb
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.csproj.ResolveComReference.cache
+C:\Users\michael.young\source\repos\DataCollector\obj\Debug\DataCollector.ChartForm.resources
