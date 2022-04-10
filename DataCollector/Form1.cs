@@ -45,7 +45,7 @@ namespace DataCollector
         private void GetYear()
         {
             int year = dtpYear.Value.Year;
-            string archivePath = rootFolderPath + @"\Archive";
+            string archivePath = rootFolderPath + @"\~Archive";
             if (Directory.Exists(archivePath))
             {
                 string yearPath = archivePath + "\\" + year.ToString();
@@ -64,10 +64,15 @@ namespace DataCollector
 
         private void btnShowWeights_Click(object sender, EventArgs e)
         {
-            if (checkCollection != null)
+            if (checkCollection != null && !string.IsNullOrWhiteSpace(txtProductCode.Text))
             {
-                ChartForm form = new ChartForm(GetWeightsByProductCode("025501-0594"));
-                form.Show();
+                var list = GetWeightsByProductCode(txtProductCode.Text);
+                if (list != null && list.Count > 0)
+                {
+
+                    ChartForm form = new ChartForm(list);
+                    form.Show(); 
+                }
             }
         }
     }

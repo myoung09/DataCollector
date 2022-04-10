@@ -39,11 +39,11 @@ namespace DataCollector.Models
           
 
             checks = new List<Check>();
-            for (int i = 1; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
 
                 checks.Add(new Check(excelWorksheet, $"H{11 + i*pageShift}", $"K{11 + i * pageShift}", $"H{14 + i * pageShift}:H{23 + i * pageShift}", $"J{14 + i * pageShift}:J{23 + i * pageShift}", $"K{14 + i * pageShift}:K{23 + i * pageShift}", $"A{11 + i * pageShift}:E{12 + i * pageShift}",
-                     $"A{14 + i * pageShift}:E{15 + i * pageShift}", $"M11{11 + i * pageShift}:N{18 + i * pageShift}", $"M{20 + i * pageShift}:N{24 + i * pageShift}",i)); 
+                     $"A{14 + i * pageShift}:E{15 + i * pageShift}", $"M11{11 + i * pageShift}:N{18 + i * pageShift}", $"M{20 + i * pageShift}:N{24 + i * pageShift}", $"J{8+i*pageShift}", $"K{8 + i * pageShift}", $"M{8 + i * pageShift}", $"O{8 + i * pageShift}", i)); 
             }
 
             this.year = year;
@@ -56,7 +56,7 @@ namespace DataCollector.Models
             List<ValueDate> weights = new List<ValueDate>();
             foreach (Check item in checks)
             {
-                weights.Add(new ValueDate(item.CheckNumber,"Weight",item.GetAverageWeight(),time,item.ProductCode));
+                weights.Add(new ValueDate(item.CheckNumber,"Weight",item.GetAverageWeight(),time,item.ProductCode,item.MinTolWeight,item.MaxTolWeight));
             }
             return weights;
         }

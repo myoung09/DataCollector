@@ -34,6 +34,7 @@
             this.dtpYear = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.btnShowWeights = new System.Windows.Forms.Button();
+            this.txtProductCode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblFolderSource
@@ -86,7 +87,7 @@
             // 
             // btnShowWeights
             // 
-            this.btnShowWeights.Location = new System.Drawing.Point(163, 121);
+            this.btnShowWeights.Location = new System.Drawing.Point(230, 111);
             this.btnShowWeights.Name = "btnShowWeights";
             this.btnShowWeights.Size = new System.Drawing.Size(150, 23);
             this.btnShowWeights.TabIndex = 5;
@@ -94,11 +95,19 @@
             this.btnShowWeights.UseVisualStyleBackColor = true;
             this.btnShowWeights.Click += new System.EventHandler(this.btnShowWeights_Click);
             // 
+            // txtProductCode
+            // 
+            this.txtProductCode.Location = new System.Drawing.Point(30, 111);
+            this.txtProductCode.Name = "txtProductCode";
+            this.txtProductCode.Size = new System.Drawing.Size(178, 20);
+            this.txtProductCode.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 156);
+            this.Controls.Add(this.txtProductCode);
             this.Controls.Add(this.btnShowWeights);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpYear);
@@ -120,6 +129,7 @@
         private System.Windows.Forms.DateTimePicker dtpYear;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnShowWeights;
+        private System.Windows.Forms.TextBox txtProductCode;
     }
 }
 

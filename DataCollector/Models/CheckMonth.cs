@@ -35,7 +35,7 @@ namespace DataCollector.Models
             {
                 string day = i < 10 ? "0" + i : i.ToString();
                 
-                string dayPath = monthPath + $@"\{day}-{sMonth}-{year-2000}";
+                string dayPath = monthPath + $@"\{sMonth}-{day}-{year-2000}";
                 if (Directory.Exists(dayPath))
                 {
                     checkDays.Add(new CheckDay(dayPath,year,month,i));
@@ -43,6 +43,7 @@ namespace DataCollector.Models
             }
 
         }
+       
 
         internal List<ValueDate> GetWeightsByProductCode(string productCode)
         {

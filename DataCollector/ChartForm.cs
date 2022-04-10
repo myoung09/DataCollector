@@ -29,9 +29,12 @@ namespace DataCollector
             var check2List = values.Where(x => x.CheckNumber == 2);
             var check3List = values.Where(x => x.CheckNumber == 3);
 
+            var min = values.Average(x => x.Min);
+            var max = values.Average(x=>x.Max);
+
             this.chartControl.Series.Clear();
-            chartControl.ChartAreas[0].AxisY.Maximum = 8;
-            chartControl.ChartAreas[0].AxisY.Minimum = 7;
+            chartControl.ChartAreas[0].AxisY.Maximum = max;
+            chartControl.ChartAreas[0].AxisY.Minimum = min;
 
             this.chartControl.Titles.Add("Checks");
             if (check1List != null && check1List.Count() > 0)

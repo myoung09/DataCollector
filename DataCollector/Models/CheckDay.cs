@@ -32,10 +32,10 @@ namespace DataCollector.Models
 
             foreach (string item in Directory.GetFiles(dayPath))
             {
-                Workbook excelWorkbook = excelApp.Workbooks.Open(item);
+                Workbook excelWorkbook = null;
                 try
                 {
-
+                    excelWorkbook = excelApp.Workbooks.Open(item);
 
                     Sheets excelSheets = excelWorkbook.Worksheets;
                     Worksheet excelWorksheet = (Worksheet)excelSheets.get_Item(1);
@@ -45,14 +45,17 @@ namespace DataCollector.Models
 
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     _ = 0;
 
                 }
                 finally
                 {
-                    excelWorkbook.Close();
+                    if (excelWorkbook != null)
+                    {
+                        excelWorkbook.Close(); 
+                    }
                 }
             }
             excelApp.Quit();
