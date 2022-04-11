@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace DataCollector.Models
 {
+    [Serializable]
     internal class CheckYear
     {
         string yearFolderPath;
         int year;
         List<CheckMonth> checkMonths;
+        public CheckYear()
+        {
 
+        }
         public CheckYear(string yearFolderPath, int year)
         {
             this.yearFolderPath = yearFolderPath;
@@ -23,6 +27,8 @@ namespace DataCollector.Models
         }
 
         public string YearFolderPath { get => yearFolderPath; set => yearFolderPath = value; }
+        public int Year { get => year; set => year = value; }
+        public List<CheckMonth> CheckMonths { get => checkMonths; set => checkMonths = value; }
 
         private void GetMonths()
         {

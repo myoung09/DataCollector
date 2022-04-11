@@ -22,3 +22,6 @@ C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\obj\Debug\Dat
 C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\obj\Debug\DataCollector.csproj.CoreCompileInputs.cache
 C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\obj\Debug\DataCollector.exe
 C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\obj\Debug\DataCollector.pdb
+C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Michael\Source\Repos\myoung09\DataCollector\DataCollector\obj\Debug\DataCollector.csproj.CopyComplete

@@ -20,53 +20,89 @@ namespace DataCollector
         {
             InitializeComponent();
             this.values = values;
+            chartControl.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chartControl.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+            chartControl.ChartAreas[1].AxisX.ScaleView.Zoomable = true;
+            chartControl.ChartAreas[1].AxisY.ScaleView.Zoomable = true;
             SplineChartExample();
+            chartControl.MouseWheel += ChartControl_MouseWheel;
+        }
+
+        private void ChartControl_MouseWheel(object sender, MouseEventArgs e)
+        {
+            var chart = (Chart)sender;
+            for (int i = 0; i < chart.ChartAreas.Count; i++)
+            {
+                
+                var xAxis = chart.ChartAreas[i].AxisX;
+                var yAxis = chart.ChartAreas[i].AxisY;
+
+
+
+                try
+                {
+
+                    if (e.Delta < 0) // Scrolled down.
+                    {
+                        xAxis.ScaleView.ZoomReset();
+                        yAxis.ScaleView.ZoomReset();
+                    }
+                    else if (e.Delta > 0) // Scrolled up.
+                    {
+                        var xMin = xAxis.ScaleView.ViewMinimum;
+                        var xMax = xAxis.ScaleView.ViewMaximum;
+                        var yMin = yAxis.ScaleView.ViewMinimum;
+                        var yMax = yAxis.ScaleView.ViewMaximum;
+
+                        var posXStart = xAxis.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 4;
+                        var posXFinish = xAxis.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 4;
+                        var posYStart = yAxis.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 4;
+                        var posYFinish = yAxis.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 4;
+
+                        xAxis.ScaleView.Zoom(posXStart, posXFinish);
+                        yAxis.ScaleView.Zoom(posYStart, posYFinish);
+                    }
+
+                }
+                catch { }
+            }
         }
 
         private void SplineChartExample()
         {
-            var check1List = values.Where(x => x.CheckNumber == 1);
-            var check2List = values.Where(x => x.CheckNumber == 2);
-            var check3List = values.Where(x => x.CheckNumber == 3);
+
+
 
             var min = values.Average(x => x.Min);
-            var max = values.Average(x=>x.Max);
+            var max = values.Average(x => x.Max);
+
 
             this.chartControl.Series.Clear();
-            chartControl.ChartAreas[0].AxisY.Maximum = max;
-            chartControl.ChartAreas[0].AxisY.Minimum = min;
+            chartControl.ChartAreas[0].AxisY.Maximum = max + (max - min);
+            chartControl.ChartAreas[0].AxisY.Minimum = min - (max - min);
+
+            chartControl.ChartAreas[1].AxisY.Maximum = 23;
+            chartControl.ChartAreas[1].AxisY.Minimum = 0;
 
             this.chartControl.Titles.Add("Checks");
-            if (check1List != null && check1List.Count() > 0)
+            if (values != null && values.Count() > 0)
             {
-                Series check1 = this.chartControl.Series.Add("Check 1");
+                Series check1 = this.chartControl.Series.Add("Check");
+                check1.ChartArea = "ChartArea1";
                 check1.ChartType = SeriesChartType.Spline;
-                check1.IsXValueIndexed = true;
-                foreach (var item in check1List)
+
+                Series time = this.chartControl.Series.Add("time");
+                time.ChartArea = "ChartArea2";
+                time.ChartType = SeriesChartType.Spline;
+                foreach (var item in values.OrderBy(x => x.CheckTime))
                 {
-                    check1.Points.AddXY(item.CheckTime, item.Value);
+                    if (item.Value > 0)
+                    {
+                        check1.Points.AddXY(item.CheckTime, item.Value);
+                        time.Points.AddXY(item.CheckTime, item.CheckTime.Hour);
+                    }
                 }
 
-            }
-            if (check2List != null && check2List.Count() > 0)
-            {
-                Series check2 = this.chartControl.Series.Add("Check 2");
-                check2.ChartType = SeriesChartType.Spline;
-                check2.IsXValueIndexed = true;
-                foreach (var item in check2List)
-                {
-                    check2.Points.AddXY(item.CheckTime, item.Value);
-                }
-            }
-            if (check3List != null && check3List.Count() > 0)
-            {
-                Series check3 = this.chartControl.Series.Add("Check 3");
-                check3.ChartType = SeriesChartType.Spline;
-                check3.IsXValueIndexed = true;
-                foreach (var item in check3List)
-                {
-                    check3.Points.AddXY(item.CheckTime, item.Value);
-                }
             }
             chartControl.Invalidate();
 

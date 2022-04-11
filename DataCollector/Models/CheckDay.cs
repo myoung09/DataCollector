@@ -8,6 +8,7 @@ using DataCollector.Models.DataModels;
 using Microsoft.Office.Interop.Excel;
 namespace DataCollector.Models
 {
+    [Serializable]
     internal class CheckDay
     {
 
@@ -16,6 +17,17 @@ namespace DataCollector.Models
         private int month;
         private int day;
         private List<ProductCheck> productChecks;
+
+        public string DayPath { get => dayPath; set => dayPath = value; }
+        public int Year { get => year; set => year = value; }
+        public int Month { get => month; set => month = value; }
+        public int Day { get => day; set => day = value; }
+        public List<ProductCheck> ProductChecks { get => productChecks; set => productChecks = value; }
+
+        public CheckDay()
+        {
+
+        }
         public CheckDay(string dayPath, int year, int month, int day)
         {
             this.dayPath = dayPath;
@@ -54,6 +66,7 @@ namespace DataCollector.Models
                 {
                     if (excelWorkbook != null)
                     {
+                       
                         excelWorkbook.Close(); 
                     }
                 }

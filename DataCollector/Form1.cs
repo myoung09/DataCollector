@@ -1,5 +1,6 @@
 ﻿using DataCollector.Models;
 using DataCollector.Models.DataModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,34 @@ namespace DataCollector
 {
     public partial class Form1 : Form
     {
+        Timer timer;
+        long tiks;
         string rootFolderPath = @"C:\Users\michael.young\Documents\Taxes\Quality Checks";
         CheckYear checkCollection;
 
         public Form1()
         {
             InitializeComponent();
+            timer = new Timer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = 1000; // 1 second;
+            timer.Enabled = false;
+            this.FormClosing += Form1_FormClosing;
+            ImportFromJSON();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (sender is Timer timer)
+            {
+                var time = TimeSpan.FromSeconds(tiks++);
+                lblTimerDisplay.Text = string.Format("{0} hours {1} min {2} sec", time.Hours,time.Minutes,time.Seconds);
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ExportToJSON();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -36,10 +59,37 @@ namespace DataCollector
             }
         }
 
-        private void btnRun_Click(object sender, EventArgs e)
+        public void Crashed()
         {
-            GetYear();
-            
+            ExportToJSON();
+        }
+        private void ExportToJSON()
+        {
+            if (checkCollection!=null)
+            {
+                string json = JsonConvert.SerializeObject(checkCollection);
+                File.WriteAllText( "temp.txt",json); 
+            }
+
+        }
+        private void ImportFromJSON()
+        {
+            if (File.Exists("temp.txt"))
+            {
+                var json = File.ReadAllText("temp.txt");
+                var obj = JsonConvert.DeserializeObject<CheckYear>(json);
+                checkCollection = obj;
+            }
+        }
+        private async void btnRun_Click(object sender, EventArgs e)
+        {
+            timer.Enabled = true;
+            await Task.Run(() =>
+            {
+                GetYear();
+            });
+                
+            timer.Enabled = false;
         }
 
         private void GetYear()
@@ -51,7 +101,7 @@ namespace DataCollector
                 string yearPath = archivePath + "\\" + year.ToString();
                 if (Directory.Exists(yearPath))
                 {
-                    checkCollection = new CheckYear(yearPath,year);
+                    checkCollection = new CheckYear(yearPath, year);
                 }
             }
 
@@ -59,7 +109,7 @@ namespace DataCollector
 
         private List<ValueDate> GetWeightsByProductCode(string productCode)
         {
-          return checkCollection.GetWeightsByProductCode(productCode);
+            return checkCollection.GetWeightsByProductCode(productCode);
         }
 
         private void btnShowWeights_Click(object sender, EventArgs e)
@@ -71,7 +121,15 @@ namespace DataCollector
                 {
 
                     ChartForm form = new ChartForm(list);
-                    form.Show(); 
+                    try
+                    {
+                        form.Show();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }

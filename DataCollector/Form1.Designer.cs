@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnShowWeights = new System.Windows.Forms.Button();
             this.txtProductCode = new System.Windows.Forms.TextBox();
+            this.lblTimerDisplay = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblFolderSource
@@ -102,11 +103,23 @@
             this.txtProductCode.Size = new System.Drawing.Size(178, 20);
             this.txtProductCode.TabIndex = 6;
             // 
+            // lblTimerDisplay
+            // 
+            this.lblTimerDisplay.AutoSize = true;
+            this.lblTimerDisplay.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblTimerDisplay.Location = new System.Drawing.Point(749, 0);
+            this.lblTimerDisplay.Name = "lblTimerDisplay";
+            this.lblTimerDisplay.Size = new System.Drawing.Size(29, 13);
+            this.lblTimerDisplay.TabIndex = 7;
+            this.lblTimerDisplay.Text = "timer";
+            this.lblTimerDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 156);
+            this.Controls.Add(this.lblTimerDisplay);
             this.Controls.Add(this.txtProductCode);
             this.Controls.Add(this.btnShowWeights);
             this.Controls.Add(this.label1);
@@ -130,6 +143,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnShowWeights;
         private System.Windows.Forms.TextBox txtProductCode;
+        private System.Windows.Forms.Label lblTimerDisplay;
     }
 }
 
